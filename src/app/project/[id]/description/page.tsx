@@ -14,15 +14,19 @@ import {
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import ProjectDetails from "@/components/ProjectDetails";
+import { getToken } from "@/lib/getCookie";
+import { getUser } from "@/actions/auth";
 
-export default function Page({
+export default async function Page({
   params,
 }: {
   params: {
     id: string;
   };
 }) {
+  const token: string = getToken() || "";
+  const user = await getUser(token);
+  console.log(user);
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">

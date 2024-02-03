@@ -2,7 +2,7 @@
 
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import { encode } from 'jwt-simple'
+import { encode, decode } from 'jwt-simple'
 import { cookies } from "next/headers";
 import crypto from "crypto";
 import { eq, and } from "drizzle-orm";
@@ -85,3 +85,15 @@ export async function login(data: { email: string, password: string }) {
         throw e;
     }
 }
+
+
+export async function getUser(tokenString: string) {
+    try {
+        const result = decode(tokenString, process.env.SALT_KEY!, false, "HS512");
+        return result;
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}
+
