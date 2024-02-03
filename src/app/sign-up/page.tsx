@@ -17,6 +17,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -35,11 +43,12 @@ const formSchema = z.object({
   name: z.string().min(1, {
     message: "Name must be at least 1 characters.",
   }),
+  role: z.string().min(1, {
+    message: "Role must be defined.",
+  }),
 });
 
-
 export default function SignUp() {
-
   const router = useRouter();
   const [error, setError] = useState(null);
 
@@ -49,11 +58,13 @@ export default function SignUp() {
       email: "",
       password: "",
       name: "",
+      role: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      console.log(values);
       const res = await signup(values);
       console.log(res);
       router.push("/");
@@ -121,7 +132,30 @@ export default function SignUp() {
                     </FormItem>
                   )}
                 />
-
+                <FormField
+                  control={form.control}
+                  name="role"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Role</FormLabel>
+                      <FormControl>
+                        <Select>
+                          <SelectTrigger id="role">
+                            <SelectValue placeholder="Select role" />
+                          </SelectTrigger>
+                          <SelectContent position="popper" {...field}>
+                            <SelectItem value="mentii">Mentii</SelectItem>
+                            <SelectItem value="mentor">Mentor</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormDescription>
+                        Select your role in this
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <Button type="submit">Sign Up</Button>
               </form>
             </Form>

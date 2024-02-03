@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import crypto from "crypto";
 import { eq, and } from "drizzle-orm";
 
-export async function signup(data: { email: string, password: string, name: string }) {
+export async function signup(data: { email: string, password: string, name: string, role: string}) {
     try {
         const cookieStore = cookies();
         data.password = crypto

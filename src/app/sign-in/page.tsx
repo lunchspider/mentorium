@@ -92,19 +92,19 @@ export default function SignIn() {
                 <FormField
                   control={form.control}
                   name="password"
-                  render={() => (
+                  render={({ field }) => (
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="Password" />
+                        <Input placeholder="Password" {...field} />
                       </FormControl>
                       <FormDescription>Enter your password.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+                <Button type="submit">Login</Button>
               </form>
-              <Button type="submit">Login</Button>
             </Form>
           </CardContent>
         </Card>
