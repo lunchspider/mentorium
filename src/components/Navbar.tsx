@@ -9,7 +9,7 @@ export default function Navbar() {
       <Link className="flex items-center gap-2" href="/">
         <ResumeIcon className="h-6 w-6" />
         <span className="text-lg font-semibold text-gray-900 dark:text-gray-50">
-          Event
+          Mentorium
         </span>
       </Link>
       <div className="ml-auto flex gap-2">

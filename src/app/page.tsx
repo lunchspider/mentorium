@@ -1,6 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ShowcaseProject from "@/components/Showcase";
+import Showcase2Project from "@/components/Showcase2";
+import Showcase3Project from "@/components/Showcase3";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
@@ -11,14 +13,13 @@ export default function Home() {
           <div className="flex flex-col items-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                Welcome to Our Community
+                Welcome to Mentorium
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Join our community and stay updated with the latest news and
-                events.
+              A vibrant ecosystem that brings together the worlds of innovation and mentorship. 
               </p>
             </div>
-            <div className="w-full max-w-sm space-y-2">
+            {/* <div className="w-full max-w-sm space-y-2">
               <form className="flex flex-col space-y-2">
                 <Input
                   className="max-w-lg flex-1"
@@ -32,18 +33,16 @@ export default function Home() {
                 />
                 <Button type="submit">Subscribe</Button>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="flex flex-col items-center justify-center py-2">
-          <h1 className="text-3xl font-bold tracking-tight text-center md:text-4xl lg:text-5xl">
-            Generative Models
-          </h1>
-          <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-4">
+          
+          <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
             <ShowcaseProject />
-            <ShowcaseProject />
-            <ShowcaseProject />
-            <ShowcaseProject />
+            <Showcase2Project />
+            <Showcase3Project />
+            {/* <ShowcasePro3ect /> */}
           </div>
         </div>
       </section>

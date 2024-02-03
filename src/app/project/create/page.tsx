@@ -101,7 +101,7 @@ export default function ProjectCreate() {
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button variant="outline">Cancel</Button>
-          <Button>Deploy</Button>
+          <Button>Create</Button>
         </CardFooter>
       </Card>
     </div >
