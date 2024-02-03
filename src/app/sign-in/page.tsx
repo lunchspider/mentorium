@@ -34,9 +34,7 @@ const formSchema = z.object({
   }),
 });
 
-
 export default function SignIn() {
-
   const router = useRouter();
   const [error, setError] = useState(null);
 
@@ -50,6 +48,7 @@ export default function SignIn() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      console.log(values);
       const res = await login(values);
       console.log(res);
       router.push("/");
@@ -60,7 +59,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center  min-h-screen">
       <div>
         <Card className="w-[350px]">
           <CardHeader>
