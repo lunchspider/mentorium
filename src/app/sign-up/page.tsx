@@ -58,7 +58,7 @@ export default function SignUp() {
       email: "",
       password: "",
       name: "",
-      role: "",
+      role: "student",
     },
   });
 
@@ -138,17 +138,17 @@ export default function SignUp() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Role</FormLabel>
-                      <FormControl>
-                        <Select>
-                          <SelectTrigger id="role">
-                            <SelectValue placeholder="Select role" />
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select what you want to sign up as" />
                           </SelectTrigger>
-                          <SelectContent position="popper" {...field}>
-                            <SelectItem value="mentii">Mentii</SelectItem>
-                            <SelectItem value="mentor">Mentor</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="mentor">Mentor</SelectItem>
+                          <SelectItem value="student">Student</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormDescription>
                         Select your role in this
                       </FormDescription>
