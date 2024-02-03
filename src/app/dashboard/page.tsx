@@ -5,10 +5,9 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import ProjectDetails from "@/components/ProjectDetails";
 import { useState } from "react";
-import Header from "@/components/Header";
 
 export default function Page() {
-  const [isMentor, setIsMentor] = useState<boolean>(true);
+  const [isMentor, setIsMentor] = useState<boolean>(false);
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
@@ -57,7 +56,7 @@ export default function Page() {
                 Submit
               </Button>
             </form>
-            {isMentor ? null : <Button>Add New</Button>}
+            {isMentor ? null : <Link href={"/project/create"}><Button>Add New</Button></Link>}
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
             <ProjectDetails />
