@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,19 +38,23 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center">
+    <div className="flex min-h-screen flex-col border items-center justify-center">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-2/3 sm:w-1/4 space-y-6"
+        >
           <FormField
             control={form.control}
             name="email"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" />
+                  <Input placeholder="Email" {...field} />
                 </FormControl>
                 <FormDescription>Enter your email.</FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -57,13 +62,14 @@ export default function SignUp() {
           <FormField
             control={form.control}
             name="password"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Password" />
+                  <Input placeholder="Password" {...field} />
                 </FormControl>
                 <FormDescription>Enter your password.</FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           />
