@@ -75,7 +75,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center w-full items-center min-h-screen">
       <div>
         <Card className="w-[350px]">
           <CardHeader>
@@ -86,7 +86,7 @@ export default function SignUp() {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
+                className="space-y-1"
               >
                 <FormField
                   control={form.control}
@@ -138,7 +138,10 @@ export default function SignUp() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Role</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select what you want to sign up as" />
