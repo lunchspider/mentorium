@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server'
 import { isAuthenticated } from './lib/auth'
 
 export const config = {
-  matcher: '/dashboard/:path*',
+  matcher: ['/dashboard/:path*',"/projects/:path*"],
 }
 
 export function middleware(request: NextRequest) {

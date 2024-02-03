@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ShowcaseProject from "@/components/Showcase";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (

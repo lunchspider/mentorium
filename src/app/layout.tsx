@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { isAuthenticated } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAuth = isAuthenticated();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -27,7 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="h-screen">
-            <Navbar />
+            {!isAuth ? <Navbar /> : <Header />}
             {children}
             <Footer />
           </div>

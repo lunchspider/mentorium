@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Header from "@/components/Header";
 import {
   CardTitle,
   CardDescription,
@@ -25,166 +26,178 @@ export default function Page({
   };
 }) {
   return (
-    <div className="flex flex-col w-full min-h-screen">
-      <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
-        <Link
-          className="flex items-center gap-2 text-lg font-semibold sm:text-base mr-4"
-          href="/"
-        >
-          <FrameIcon className="w-6 h-6" />
-          <span className="sr-only">Acme Inc</span>
-        </Link>
-        <nav className="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
-          <Link className="font-bold" href="#">
-            {params.id}
+    <>
+      <div className="flex flex-col w-full min-h-screen">
+        <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
+          <Link
+            className="flex items-center gap-2 text-lg font-semibold sm:text-base mr-4"
+            href="/"
+          >
+            <FrameIcon className="w-6 h-6" />
+            <span className="sr-only">Acme Inc</span>
           </Link>
-          <Link className="text-gray-500 dark:text-gray-400" href="#">
-            Deployments
-          </Link>
-          <Link className="text-gray-500 dark:text-gray-400" href="#">
-            Analytics
-          </Link>
-          <Link className="text-gray-500 dark:text-gray-400" href="#">
-            Logs
-          </Link>
-          <Link className="text-gray-500 dark:text-gray-400" href="#">
-            Settings
-          </Link>
-        </nav>
-        <div className="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <Button className="rounded-full ml-auto" size="icon" variant="ghost">
-            <Image
-              alt="Avatar"
-              className="rounded-full border"
-              height="32"
-              src="/placeholder.svg"
-              style={{
-                aspectRatio: "32/32",
-                objectFit: "cover",
-              }}
-              width="32"
-            />
-            <span className="sr-only">Toggle user menu</span>
-          </Button>
-        </div>
-      </header>
-      <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-          <Card>
-            <CardHeader className="flex flex-row items-center gap-4">
-              <HomeIcon className="w-8 h-8" />
-              <div className="grid gap-1">
-                <CardTitle>www</CardTitle>
-                <CardDescription>example.com</CardDescription>
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="ml-auto" size="icon" variant="ghost">
-                    <MoreHorizontalIcon className="w-4 h-4" />
-                    <span className="sr-only">Toggle menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>View Project</DropdownMenuItem>
-                  <DropdownMenuItem>View Settings</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </CardHeader>
-            <CardContent className="grid gap-2">
-              <div className="text-sm font-semibold">
-                feat: update color scheme
-              </div>
-              <div className="flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-1">
-                  <GithubIcon className="w-4 h-4" />
-                  <span className="text-gray-500 dark:text-gray-400">
-                    3h ago
-                  </span>
+          <nav className="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
+            <Link className="font-bold" href="#">
+              {params.id}
+            </Link>
+            <Link className="text-gray-500 dark:text-gray-400" href="#">
+              Deployments
+            </Link>
+            <Link className="text-gray-500 dark:text-gray-400" href="#">
+              Analytics
+            </Link>
+            <Link className="text-gray-500 dark:text-gray-400" href="#">
+              Logs
+            </Link>
+            <Link className="text-gray-500 dark:text-gray-400" href="#">
+              Settings
+            </Link>
+          </nav>
+          <div className="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4">
+            <Button
+              className="rounded-full ml-auto"
+              size="icon"
+              variant="ghost"
+            >
+              <Image
+                alt="Avatar"
+                className="rounded-full border"
+                height="32"
+                src="/placeholder.svg"
+                style={{
+                  aspectRatio: "32/32",
+                  objectFit: "cover",
+                }}
+                width="32"
+              />
+              <span className="sr-only">Toggle user menu</span>
+            </Button>
+          </div>
+        </header>
+        <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
+            <Card>
+              <CardHeader className="flex flex-row items-center gap-4">
+                <HomeIcon className="w-8 h-8" />
+                <div className="grid gap-1">
+                  <CardTitle>www</CardTitle>
+                  <CardDescription>example.com</CardDescription>
                 </div>
-                <div className="flex items-center gap-1">
-                  <GitBranchIcon className="w-4 h-4" />
-                  <span className="text-gray-500 dark:text-gray-400">main</span>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="ml-auto" size="icon" variant="ghost">
+                      <MoreHorizontalIcon className="w-4 h-4" />
+                      <span className="sr-only">Toggle menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>View Project</DropdownMenuItem>
+                    <DropdownMenuItem>View Settings</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </CardHeader>
+              <CardContent className="grid gap-2">
+                <div className="text-sm font-semibold">
+                  feat: update color scheme
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center gap-4">
-              <BookOpenIcon className="w-8 h-8" />
-              <div className="grid gap-1">
-                <CardTitle>docs</CardTitle>
-                <CardDescription>docs.example.com</CardDescription>
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="ml-auto" size="icon" variant="ghost">
-                    <MoreHorizontalIcon className="w-4 h-4" />
-                    <span className="sr-only">Toggle menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>View Project</DropdownMenuItem>
-                  <DropdownMenuItem>View Settings</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </CardHeader>
-            <CardContent className="grid gap-2">
-              <div className="text-sm font-semibold">
-                docs: add docs for memberships
-              </div>
-              <div className="flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-1">
-                  <GithubIcon className="w-4 h-4" />
-                  <span className="text-gray-500 dark:text-gray-400">
-                    1 day ago
-                  </span>
+                <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <GithubIcon className="w-4 h-4" />
+                    <span className="text-gray-500 dark:text-gray-400">
+                      3h ago
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <GitBranchIcon className="w-4 h-4" />
+                    <span className="text-gray-500 dark:text-gray-400">
+                      main
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1">
-                  <GitBranchIcon className="w-4 h-4" />
-                  <span className="text-gray-500 dark:text-gray-400">main</span>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center gap-4">
+                <BookOpenIcon className="w-8 h-8" />
+                <div className="grid gap-1">
+                  <CardTitle>docs</CardTitle>
+                  <CardDescription>docs.example.com</CardDescription>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center gap-4">
-              <LayoutPanelLeftIcon className="w-8 h-8" />
-              <div className="grid gap-1">
-                <CardTitle>app</CardTitle>
-                <CardDescription>app.example.com</CardDescription>
-              </div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button className="ml-auto" size="icon" variant="ghost">
-                    <MoreHorizontalIcon className="w-4 h-4" />
-                    <span className="sr-only">Toggle menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>View Project</DropdownMenuItem>
-                  <DropdownMenuItem>View Settings</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </CardHeader>
-            <CardContent className="grid gap-2">
-              <div className="text-sm font-semibold">fix: login issues</div>
-              <div className="flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-1">
-                  <GithubIcon className="w-4 h-4" />
-                  <span className="text-gray-500 dark:text-gray-400">
-                    2 days ago
-                  </span>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="ml-auto" size="icon" variant="ghost">
+                      <MoreHorizontalIcon className="w-4 h-4" />
+                      <span className="sr-only">Toggle menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>View Project</DropdownMenuItem>
+                    <DropdownMenuItem>View Settings</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </CardHeader>
+              <CardContent className="grid gap-2">
+                <div className="text-sm font-semibold">
+                  docs: add docs for memberships
                 </div>
-                <div className="flex items-center gap-1">
-                  <GitBranchIcon className="w-4 h-4" />
-                  <span className="text-gray-500 dark:text-gray-400">main</span>
+                <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <GithubIcon className="w-4 h-4" />
+                    <span className="text-gray-500 dark:text-gray-400">
+                      1 day ago
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <GitBranchIcon className="w-4 h-4" />
+                    <span className="text-gray-500 dark:text-gray-400">
+                      main
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-    </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center gap-4">
+                <LayoutPanelLeftIcon className="w-8 h-8" />
+                <div className="grid gap-1">
+                  <CardTitle>app</CardTitle>
+                  <CardDescription>app.example.com</CardDescription>
+                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button className="ml-auto" size="icon" variant="ghost">
+                      <MoreHorizontalIcon className="w-4 h-4" />
+                      <span className="sr-only">Toggle menu</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem>View Project</DropdownMenuItem>
+                    <DropdownMenuItem>View Settings</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </CardHeader>
+              <CardContent className="grid gap-2">
+                <div className="text-sm font-semibold">fix: login issues</div>
+                <div className="flex items-center gap-4 text-sm">
+                  <div className="flex items-center gap-1">
+                    <GithubIcon className="w-4 h-4" />
+                    <span className="text-gray-500 dark:text-gray-400">
+                      2 days ago
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <GitBranchIcon className="w-4 h-4" />
+                    <span className="text-gray-500 dark:text-gray-400">
+                      main
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+      </div>
+    </>
   );
 }
 
