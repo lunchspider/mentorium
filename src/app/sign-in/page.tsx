@@ -14,7 +14,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -22,6 +21,9 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { login } from "@/actions/auth";
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -32,11 +34,12 @@ const formSchema = z.object({
   }),
 });
 
-async function onSubmit(values: z.infer<typeof formSchema>) {
-  console.log(values);
-}
 
 export default function SignIn() {
+
+  const router = useRouter();
+  const [error, setError] = useState(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,6 +47,17 @@ export default function SignIn() {
       password: "",
     },
   });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const res = await login(values);
+      console.log(res);
+      router.push("/");
+    } catch (e: any) {
+      console.log(e);
+      setError(e.message);
+    }
+  }
 
   return (
     <div className="flex justify-center items-center">

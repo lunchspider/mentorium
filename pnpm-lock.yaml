@@ -38,6 +38,9 @@ dependencies:
   drizzle-orm:
     specifier: ^0.29.3
     version: 0.29.3(@types/pg@8.11.0)(@types/react@18.0.0)(@vercel/postgres@0.7.2)(react@18.0.0)
+  jwt-simple:
+    specifier: ^0.5.6
+    version: 0.5.6
   lucide-react:
     specifier: ^0.321.0
     version: 0.321.0(react@18.0.0)
@@ -3175,6 +3178,11 @@ packages:
       object.assign: 4.1.5
       object.values: 1.1.7
     dev: true
+
+  /jwt-simple@0.5.6:
+    resolution: {integrity: sha512-40aUybvhH9t2h71ncA1/1SbtTNCVZHgsTsTgqPUxGWDmUDrXyDf2wMNQKEbdBjbf4AI+fQhbECNTV6lWxQKUzg==}
+    engines: {node: '>= 0.4.0'}
+    dev: false
 
   /keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
