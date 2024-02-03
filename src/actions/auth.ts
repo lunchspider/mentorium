@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import crypto from "crypto";
 import { eq, and } from "drizzle-orm";
 
-export async function signup(data: { email: string, password: string, name: string, role: string}) {
+export async function signup(data: { email: string, password: string, name: string, role: string }) {
     try {
         const cookieStore = cookies();
         data.password = crypto
@@ -17,7 +17,7 @@ export async function signup(data: { email: string, password: string, name: stri
 
         const user = await db.insert(users)
             .values(data)
-            .returning({ name: users.name, email: users.email, id: users.id })
+            .returning({ name: users.name, email: users.email, id: users.id, role: users.role })
             .then((res) => res[0]);
 
         const fifteenMinutesInMs = 15 * 60 * 1000;
