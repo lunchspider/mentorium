@@ -15,7 +15,7 @@ export default function Footer() {
             <Link className="text-sm font-medium " href="#">
               Services
             </Link>
-            <Link className="text-sm font-medium " href="#">
+            <Link className="text-sm font-medium " href="/contactUs">
               Contact Us
             </Link>
           </nav>

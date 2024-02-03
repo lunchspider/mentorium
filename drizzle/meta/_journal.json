@@ -29,6 +29,13 @@
       "when": 1706969120465,
       "tag": "0003_old_jubilee",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1706983805451,
+      "tag": "0004_silent_the_renegades",
+      "breakpoints": true
     }
   ]
 }

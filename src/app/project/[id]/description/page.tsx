@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Header from "@/components/Header";
 import {
   CardTitle,
   CardDescription,
