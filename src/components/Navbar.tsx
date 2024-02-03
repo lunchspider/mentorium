@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <Menubar>
       <MenubarMenu>
-        <div className="flex justify-between w-full px-28">
+        <div className="flex justify-between w-full px-28 py-5">
           <MenubarTrigger>File</MenubarTrigger>
           <MenubarContent>
             <MenubarItem>
