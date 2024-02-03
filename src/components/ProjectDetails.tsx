@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-export default function ProjectDetails() {
+import { User } from "@/db/schema";
+import Link from "next/link";
+
+export default function ProjectDetails({ userDetails }: { userDetails: User }) {
   return (
     <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
       <div className="px-4 py-5 sm:p-6">
@@ -30,7 +33,13 @@ export default function ProjectDetails() {
                 Completed
               </span>
             </dd>
-            <Button className="w-32 mt-3">Check Now</Button>
+            <Link
+              href={`/project/1/${
+                userDetails.role === "mentor" ? "feedback" : "description"
+              }`}
+            >
+              <Button className="w-32 mt-3">Check Now</Button>
+            </Link>
           </div>
         </dl>
       </div>

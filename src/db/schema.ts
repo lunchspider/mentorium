@@ -20,6 +20,7 @@ export const projects = pgTable('projects', {
     id: uuid('id').primaryKey().defaultRandom(),
     name: varchar('name').notNull(),
     description: varchar('description').notNull(),
+    category: varchar('category').notNull(),
     mentor_id: uuid('mentor_id').references(() => users.id).notNull(),
 });
 
