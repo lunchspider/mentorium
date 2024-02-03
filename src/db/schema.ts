@@ -11,7 +11,7 @@ export const users = pgTable('users', {
 });
 
 export const userRelations = relations(users, ({ many }) => ({
-    projectTechStacks: many(user_to_project),
+    userProjects: many(user_to_project),
 }));
 
 export type User = typeof users.$inferSelect;
@@ -28,7 +28,6 @@ export type Projects = typeof projects.$inferSelect;
 export const tech_stacks = pgTable('tech_stacks', {
     id: uuid('id').primaryKey().defaultRandom(),
     name: varchar('name').notNull(),
-    description: varchar('description').notNull(),
 });
 
 
