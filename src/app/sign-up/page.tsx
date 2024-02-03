@@ -75,7 +75,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center min-h-screen">
       <div>
         <Card className="w-[350px]">
           <CardHeader>
