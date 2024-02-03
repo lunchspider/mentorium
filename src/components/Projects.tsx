@@ -23,8 +23,8 @@ export function Projects() {
   return (
     <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle>Enlist project</CardTitle>
+        <CardDescription>Add up your project in one-click.</CardDescription>
       </CardHeader>
       <CardContent>
         <form>
