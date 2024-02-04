@@ -3,7 +3,7 @@
 import { projects, Project, users } from "@/db/schema";
 import { getUser } from "./auth";
 import { db } from '@/db';
-import { eq, or } from "drizzle-orm";
+import { eq, or, sql } from "drizzle-orm";
 
 export async function create_project(data: { name: string, description: string, category: string }) {
     try {
@@ -64,7 +64,7 @@ export async function get_all_project(): Promise<Project[]> {
     }
 }
 
-export async function update_project(data: {id: string, name: string, description: string, category: string,}) {
+export async function update_project(data: { id: string, name: string, description: string, category: string, }) {
     try {
         return db.update(projects).set(data).where(eq(projects.id, data.id)).returning()
             .then((res) => res[0]);
@@ -74,7 +74,7 @@ export async function update_project(data: {id: string, name: string, descriptio
     }
 }
 
-export async function get_mentor_of_project(id: string) { 
+export async function get_mentor_of_project(id: string) {
     try {
         return db
             .select()
@@ -88,10 +88,27 @@ export async function get_mentor_of_project(id: string) {
     }
 }
 
-export async function join_project(projectId: string, teacherId: string) { 
+export async function join_project(projectId: string, teacherId: string) {
     try {
-        return db.update(projects).set({ mentor_id: teacherId}).where(eq(projects.id, projectId)).returning()
+        return db
+            .update(projects)
+            .set({ mentor_id: teacherId })
+            .where(eq(projects.id, projectId))
+            .returning()
             .then((res) => res[0]);
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}
+
+export async function search_project(search_string: string) {
+    try {
+        return db
+            .select()
+            .from(projects)
+            .orderBy(sql`ts_rank(ts @@ phraseto_tsquery('english', ${search_string})) DESC`)
+            .limit(20)
     } catch (e: any) {
         console.log(e);
         throw e;

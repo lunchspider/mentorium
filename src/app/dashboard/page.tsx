@@ -1,3 +1,5 @@
+'use client';
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,16 +8,17 @@ import { getUser } from "@/actions/auth";
 import { Profile } from "@/components/Profile";
 import { AddProject } from "@/components/AddProject";
 import { redirect } from "next/navigation";
+import { use } from "react";
 import { get_projects_with_user_id, get_all_project } from "@/actions/project";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default async function Page() {
-  const user = await getUser();
+export default function Page() {
+  const user = use(getUser());
   if (!user) {
     redirect("/sign-in");
   }
-  const project_ids = await get_projects_with_user_id(user.id);
-  const all_project_ids = await get_all_project();
+  const project_ids = use(get_projects_with_user_id(user.id));
+  const all_project_ids = use(get_all_project());
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
