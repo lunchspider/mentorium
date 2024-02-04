@@ -29,7 +29,7 @@ export default function Header() {
             log Out
           </Button>
         </Link>
-        <div className="ml-4">
+        <div className="">
           <ModeToggle />
         </div>
       </div>

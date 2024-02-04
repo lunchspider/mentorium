@@ -19,9 +19,7 @@ export default function Navbar() {
         <Link href="/sign-up">
           <Button>Sign Up</Button>
         </Link>
-        <div className="ml-4">
-          <ModeToggle />
-        </div>
+        <ModeToggle />
       </div>
     </header>
   );
