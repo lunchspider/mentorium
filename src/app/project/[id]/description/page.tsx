@@ -73,7 +73,6 @@ export default async function Page({
         </header>
         <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
           <UpdateProjectDetails projectDetails={projectDetails} />
-
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
             <Card>
               <CardHeader className="flex flex-row items-center gap-4">
@@ -202,7 +201,9 @@ export default async function Page({
             <div className="grid gap-1">
               <Avatar>
                 <AvatarImage alt="Mentor" src="/placeholder-avatar.jpg" />
-                {userMentor.name.charAt(0).toUpperCase()}
+                <AvatarFallback>
+                  {userMentor.name.charAt(0).toUpperCase()}
+                </AvatarFallback>
               </Avatar>
               <h3 className="text-lg font-bold">{userMentor.name}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
