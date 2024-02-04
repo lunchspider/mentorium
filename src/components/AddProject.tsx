@@ -1,16 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { useMediaQuery } from "react-responsive";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   Drawer,
   DrawerClose,
@@ -22,8 +12,6 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Select,
@@ -34,9 +22,18 @@ import {
 } from "@/components/ui/select";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
-import { Form } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { create_project } from "@/actions/project";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -50,9 +47,6 @@ const formSchema = z.object({
 
 export function AddProject() {
   const [open, setOpen] = useState<boolean>(false);
-  const isDesktop = useMediaQuery({
-    query: "(min-width: 768px)",
-  });
   const router = useRouter();
   const [error, setError] = useState(null);
 
@@ -65,63 +59,16 @@ export function AddProject() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  const on_submit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(values);
-      router.push("/");
+      const { id } = await create_project(values);
+      console.log(id);
+      router.push(`/project/${id}`);
     } catch (e: any) {
       console.log(e);
       setError(e.message);
     }
-  }
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button>Add New</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Add A Project</DialogTitle>
-            <DialogDescription>
-              Add up your project to get mentored.
-            </DialogDescription>
-          </DialogHeader>
-          <Form {...form}>
-            <form className="space-y-1" onSubmit={form.handleSubmit(onSubmit)}>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Name of your project" />
-                </div>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="description">Description</Label>
-                  <Input
-                    id="description"
-                    placeholder="Description of your project"
-                  />
-                </div>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="category">Category</Label>
-                  <Select>
-                    <SelectTrigger id="category">
-                      <SelectValue placeholder="Progress Category" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      <SelectItem value="ideation">Ideation</SelectItem>
-                      <SelectItem value="in-progress">In Progress</SelectItem>
-                      <SelectItem value="completed">Completed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button type="submit">Deploy</Button>
-              </div>
-            </form>
-          </Form>{" "}
-        </DialogContent>
-      </Dialog>
-    );
-  }
+  };
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -135,36 +82,73 @@ export function AddProject() {
             A project can be anything from a new product to a new feature.
           </DrawerDescription>
         </DrawerHeader>
-        <div className="p-4">
+
+        <div className="flex flex-col justify-center p-4">
           <Form {...form}>
-            <form className="space-y-1" onSubmit={form.handleSubmit(onSubmit)}>
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Name of your project" />
-                </div>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="description">Description</Label>
-                  <Input
-                    id="description"
-                    placeholder="Description of your project"
-                  />
-                </div>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="category">Category</Label>
-                  <Select>
-                    <SelectTrigger id="category">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent position="popper">
-                      <SelectItem value="ideation">Ideation</SelectItem>
-                      <SelectItem value="in-progress">In Progress</SelectItem>
-                      <SelectItem value="completed">Completed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button type="submit">Deploy</Button>
-              </div>
+            <form
+              className="space-y-1 flex flex-col justify-center"
+              onSubmit={form.handleSubmit(on_submit)}
+            >
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Name" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter your project name.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Input placeholder="description" {...field} />
+                    </FormControl>
+                    <FormDescription>Enter your description</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          <SelectItem value="ideation">Ideation</SelectItem>
+                          <SelectItem value="in-progress">
+                            In Progress
+                          </SelectItem>
+                          <SelectItem value="completed">Completed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormDescription>Enter your description</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button type="submit">Deploy</Button>
             </form>
           </Form>{" "}
         </div>

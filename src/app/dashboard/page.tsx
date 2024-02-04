@@ -1,23 +1,20 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import ProjectDetails from "@/components/ProjectDetails";
 import { getToken } from "@/lib/getCookie";
 import { getUser } from "@/actions/auth";
-import { User } from "@/db/schema";
-import { TypeOf } from "zod";
 import { Profile } from "@/components/Profile";
 import { AddProject } from "@/components/AddProject";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
-  const token: string = getToken() || "";
-  const user: User = (await getUser(token)) || {
-    id: 0,
-    name: "",
-    email: "",
-    role: "",
-  };
+  const user = await getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
