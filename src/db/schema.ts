@@ -21,7 +21,7 @@ export const projects = pgTable('projects', {
     student_id: uuid('student_id').references(() => users.id).notNull(),
 });
 
-export type Projects = typeof projects.$inferSelect;
+export type Project = typeof projects.$inferSelect;
 
 export const tech_stacks = pgTable('tech_stacks', {
     id: uuid('id').primaryKey().defaultRandom(),

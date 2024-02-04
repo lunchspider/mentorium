@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ProjectDetails from "@/components/ProjectDetails";
-import { getToken } from "@/lib/getCookie";
 import { getUser } from "@/actions/auth";
 import { Profile } from "@/components/Profile";
 import { AddProject } from "@/components/AddProject";
 import { redirect } from "next/navigation";
+import { get_projects_with_user_id } from "@/actions/project";
 
 export default async function Page() {
   const user = await getUser();
@@ -14,6 +14,8 @@ export default async function Page() {
   if (!user) {
     redirect('/sign-in');
   }
+
+  const project_ids = await get_projects_with_user_id(user.id);
 
   return (
     <>
@@ -49,11 +51,9 @@ export default async function Page() {
             {user.role !== "mentor" ? <AddProject /> : null}
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-            <ProjectDetails userDetails={user} />
-            <ProjectDetails userDetails={user} />
-            <ProjectDetails userDetails={user} />
-            <ProjectDetails userDetails={user} />
-            <ProjectDetails userDetails={user} />
+            {project_ids.map((id) => {
+              return <ProjectDetails userDetails={user} project_id={id.id} />;
+            })}
           </div>
         </main>
       </div>
