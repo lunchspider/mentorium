@@ -10,10 +10,6 @@ export const users = pgTable('users', {
     created_at: timestamp('created_at').default(sql`NOW()`).notNull(),
 });
 
-export const userRelations = relations(users, ({ many }) => ({
-    userProjects: many(user_to_project),
-}));
-
 export type User = typeof users.$inferSelect;
 
 export const projects = pgTable('projects', {
@@ -21,7 +17,8 @@ export const projects = pgTable('projects', {
     name: varchar('name').notNull(),
     description: varchar('description').notNull(),
     category: varchar('category').notNull(),
-    mentor_id: uuid('mentor_id').references(() => users.id).notNull(),
+    mentor_id: uuid('mentor_id').references(() => users.id),
+    student_id: uuid('student_id').references(() => users.id).notNull(),
 });
 
 export type Projects = typeof projects.$inferSelect;
@@ -46,13 +43,3 @@ export const project_to_tech_stack = pgTable('project_to_tech_stack', {
         .notNull()
         .references(() => projects.id)
 }, (table) => ({ pk: primaryKey({ columns: [table.project_id, table.tech_stack_id] }) }))
-
-
-export const user_to_project = pgTable('user_to_project', {
-    project_id: uuid('project_id')
-        .notNull()
-        .references(() => projects.id),
-    user_id: uuid('user_id')
-        .notNull()
-        .references(() => users.id)
-}, (table) => ({ pk: primaryKey({ columns: [table.project_id, table.user_id] }) }))
