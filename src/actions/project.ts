@@ -1,6 +1,6 @@
 'use server';
 
-import { projects, Project } from "@/db/schema";
+import { projects, Project, users } from "@/db/schema";
 import { getUser } from "./auth";
 import { db } from '@/db';
 import { eq, or } from "drizzle-orm";
@@ -67,6 +67,20 @@ export async function get_all_project(): Promise<Project[]> {
 export async function update_project(data: {id: string, name: string, description: string, category: string,}) {
     try {
         return db.update(projects).set(data).where(eq(projects.id, data.id)).returning()
+            .then((res) => res[0]);
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}
+
+export async function get_mentor_of_project(id: string) { 
+    try {
+        return db
+            .select()
+            .from(users)
+            .where(eq(users.id, id))
+            .limit(1)
             .then((res) => res[0]);
     } catch (e: any) {
         console.log(e);

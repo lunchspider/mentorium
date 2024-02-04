@@ -16,8 +16,9 @@ import {
 import { Profile } from "@/components/Profile";
 import { getUser } from "@/actions/auth";
 import { Project, User } from "@/db/schema";
-import { get_project } from "@/actions/project";
+import { get_project, get_mentor } from "@/actions/project";
 import { UpdateProjectDetails } from "@/components/UpdateProjectDetails";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export default async function Page({
   params,
@@ -33,6 +34,11 @@ export default async function Page({
     console.log("project not found");
   }
   console.log(projectDetails);
+  let userMentor: User = {} as User;
+  if (projectDetails.mentor_id) {
+    userMentor = (await get_mentor(projectDetails.mentor_id)) || ({} as User);
+    console.log(userMentor);
+  }
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
@@ -44,7 +50,7 @@ export default async function Page({
             <FrameIcon className="w-6 h-6" />
           </Link>
           <nav className="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6">
-            <Link className="font-bold" href="#">
+            <Link className="font-bold w-44" href="#">
               {projectDetails.name}
             </Link>
             <Link className="text-gray-500 dark:text-gray-400" href="#">
@@ -66,13 +72,14 @@ export default async function Page({
         </header>
         <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
           <UpdateProjectDetails projectDetails={projectDetails} />
+
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
             <Card>
               <CardHeader className="flex flex-row items-center gap-4">
                 <HomeIcon className="w-8 h-8" />
                 <div className="grid gap-1">
                   <CardTitle>www</CardTitle>
-                  <CardDescription>example.com</CardDescription>
+                  <CardDescription>{projectDetails.name}.com</CardDescription>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -112,7 +119,9 @@ export default async function Page({
                 <BookOpenIcon className="w-8 h-8" />
                 <div className="grid gap-1">
                   <CardTitle>docs</CardTitle>
-                  <CardDescription>docs.example.com</CardDescription>
+                  <CardDescription>
+                    docs.{projectDetails.name}.com
+                  </CardDescription>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -152,7 +161,9 @@ export default async function Page({
                 <LayoutPanelLeftIcon className="w-8 h-8" />
                 <div className="grid gap-1">
                   <CardTitle>app</CardTitle>
-                  <CardDescription>app.example.com</CardDescription>
+                  <CardDescription>
+                    app.{projectDetails.name}.com
+                  </CardDescription>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -186,6 +197,19 @@ export default async function Page({
               </CardContent>
             </Card>
           </div>
+          {projectDetails.mentor_id && (
+            <div className="grid gap-1">
+              <Avatar>
+                <AvatarImage alt="Mentor" src="/placeholder-avatar.jpg" />
+                <AvatarFallback>JP</AvatarFallback>
+              </Avatar>
+              <h3 className="text-lg font-bold">{userMentor.name}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {userMentor.email}
+              </p>
+              <Button className="mt-2 w-1/3">Connect</Button>
+            </div>
+          )}
         </main>
       </div>
     </>
