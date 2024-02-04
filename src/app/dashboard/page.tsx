@@ -1,14 +1,23 @@
-"use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import ProjectDetails from "@/components/ProjectDetails";
-import { useState } from "react";
-import Header from "@/components/Header";
+import { getToken } from "@/lib/getCookie";
+import { getUser } from "@/actions/auth";
+import { User } from "@/db/schema";
+import { TypeOf } from "zod";
+import { Profile } from "@/components/Profile";
+import { AddProject } from "@/components/AddProject";
 
-export default function Page() {
-  const [isMentor, setIsMentor] = useState<boolean>(true);
+export default async function Page() {
+  const token: string = getToken() || "";
+  const user: User = (await getUser(token)) || {
+    id: 0,
+    name: "",
+    email: "",
+    role: "",
+  };
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
@@ -26,24 +35,7 @@ export default function Page() {
             </Link>
           </nav>
           <div className="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4">
-            <Button
-              className="rounded-full ml-auto"
-              size="icon"
-              variant="ghost"
-            >
-              <Image
-                alt="Avatar"
-                className="rounded-full border"
-                height="32"
-                src="/placeholder.svg"
-                style={{
-                  aspectRatio: "32/32",
-                  objectFit: "cover",
-                }}
-                width="32"
-              />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
+            <Profile userdetails={user} />
           </div>
         </header>
         <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
@@ -57,13 +49,14 @@ export default function Page() {
                 Submit
               </Button>
             </form>
-            {isMentor ? null : <Button>Add New</Button>}
+            {user.role !== "mentor" ? <AddProject /> : null}
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-            <ProjectDetails />
-            <ProjectDetails />
-            <ProjectDetails />
-            <ProjectDetails />
+            <ProjectDetails userDetails={user} />
+            <ProjectDetails userDetails={user} />
+            <ProjectDetails userDetails={user} />
+            <ProjectDetails userDetails={user} />
+            <ProjectDetails userDetails={user} />
           </div>
         </main>
       </div>

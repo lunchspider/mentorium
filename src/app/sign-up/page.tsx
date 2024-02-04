@@ -17,7 +17,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -67,7 +66,7 @@ export default function SignUp() {
       console.log(values);
       const res = await signup(values);
       console.log(res);
-      router.push("/");
+      router.push("/dashboard");
     } catch (e: any) {
       console.log(e);
       setError(e.message);

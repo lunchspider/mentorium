@@ -51,7 +51,7 @@ export default function SignIn() {
       console.log(values);
       const res = await login(values);
       console.log(res);
-      router.push("/");
+      router.push("/dashboard");
     } catch (e: any) {
       console.log(e);
       setError(e.message);
