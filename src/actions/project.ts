@@ -63,3 +63,13 @@ export async function get_all_project(): Promise<Project[]> {
         throw e;
     }
 }
+
+export async function update_project(data: {id: string, name: string, description: string, category: string,}) {
+    try {
+        return db.update(projects).set(data).where(eq(projects.id, data.id)).returning()
+            .then((res) => res[0]);
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}

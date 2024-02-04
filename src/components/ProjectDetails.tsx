@@ -4,11 +4,17 @@ import { User } from "@/db/schema";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function ProjectDetails({ userDetails, project_id }: { userDetails: User, project_id: string }) {
+export default async function ProjectDetails({
+  userDetails,
+  project_id,
+}: {
+  userDetails: User;
+  project_id: string;
+}) {
   const project = await get_project(project_id);
   if (!project) {
-    console.log('project not found');
-    redirect('/dashboard');
+    console.log("project not found");
+    redirect("/dashboard");
   }
   return (
     <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
@@ -40,8 +46,9 @@ export default async function ProjectDetails({ userDetails, project_id }: { user
               </span>
             </dd>
             <Link
-              href={`/project/${project.id}/${userDetails.role === "mentor" ? "feedback" : "description"
-                }`}
+              href={`/project/${project.id}/${
+                userDetails.role === "mentor" ? "feedback" : "description"
+              }`}
             >
               <Button className="w-32 mt-3">Check Now</Button>
             </Link>
