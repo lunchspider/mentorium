@@ -51,9 +51,9 @@ export default async function Page() {
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
             {user.role === "mentor" ? (
-              <Tabs defaultValue="allproject" className="w-[400px]">
+              <Tabs defaultValue="allproject">
                 <TabsList>
-                  <TabsTrigger value="allproject">all projects</TabsTrigger>
+                  <TabsTrigger value="allproject">All projects</TabsTrigger>
                   <TabsTrigger value="mentorProject">my projects</TabsTrigger>
                 </TabsList>
                 <TabsContent value="allproject">

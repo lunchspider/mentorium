@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mentorium Hackathon Project
+
+## Overview
+
+At Mentorium, we've crafted a vibrant ecosystem that brings together the worlds of innovation and mentorship. This dynamic platform serves as a meeting ground for passionate mentees seeking guidance and seasoned mentors eager to share their experience & guidance.
+
+## Tech Stack
+
+- Next.js
+- React
+- Tailwind CSS
+- PostgreSQL (psql)
+- SCADCN
 
 ## Getting Started
 
-First, run the development server:
+To get started with the Mentorium project, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```bash
+   git clone https://github.com/lunchspider/mentorium.git
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Install dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   cd mentorium
+   npm install
+   ```
 
-## Learn More
+3. Run the development server:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contributing
 
-## Deploy on Vercel
+We welcome contributions from the community. To contribute to Mentorium, please follow these steps:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with descriptive commit messages.
+4. Push your branch to your fork.
+5. Submit a pull request to the main repository.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## GitHub Repository
+
+Find the Mentorium project on GitHub: [https://github.com/lunchspider/mentorium](https://github.com/lunchspider/mentorium)
+
+## Hosted URL
+
+Explore the Mentorium platform live at [https://mentoriumm.vercel.app/](https://mentoriumm.vercel.app/)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+If you have any questions or feedback, feel free to reach out to us at [info@mentorium.com](mailto:info@mentorium.com). We appreciate your interest and support!
