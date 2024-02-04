@@ -60,6 +60,12 @@ export default function ViewProject({
             <div className="flex flex-col gap-1">
               <h3 className="text-md font-semibold">Student Name</h3>
               <div>
+                <Avatar>
+                  <AvatarImage alt="Mentor" src="/placeholder-avatar.jpg" />
+                  <AvatarFallback>
+                    {student.name.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
                 <p>{student.name}</p>
                 <p className="text-slate-500">{student.email}</p>
               </div>

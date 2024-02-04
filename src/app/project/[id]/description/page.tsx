@@ -202,7 +202,7 @@ export default async function Page({
             <div className="grid gap-1">
               <Avatar>
                 <AvatarImage alt="Mentor" src="/placeholder-avatar.jpg" />
-                <AvatarFallback>JP</AvatarFallback>
+                {userMentor.name.charAt(0).toUpperCase()}
               </Avatar>
               <h3 className="text-lg font-bold">{userMentor.name}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">

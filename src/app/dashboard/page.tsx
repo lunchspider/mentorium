@@ -7,10 +7,10 @@ import { Profile } from "@/components/Profile";
 import { AddProject } from "@/components/AddProject";
 import { redirect } from "next/navigation";
 import { get_projects_with_user_id, get_all_project } from "@/actions/project";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default async function Page() {
   const user = await getUser();
-
   if (!user) {
     redirect("/sign-in");
   }
@@ -50,8 +50,37 @@ export default async function Page() {
             {user.role !== "mentor" ? <AddProject /> : null}
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-            {user.role === "mentor"
-              ? all_project_ids.map((id, index) => {
+            {user.role === "mentor" ? (
+              <Tabs defaultValue="allproject" className="w-[400px]">
+                <TabsList>
+                  <TabsTrigger value="allproject">all projects</TabsTrigger>
+                  <TabsTrigger value="mentorProject">my projects</TabsTrigger>
+                </TabsList>
+                <TabsContent value="allproject">
+                  {all_project_ids.map((id, index) => {
+                    return (
+                      <ProjectDetails
+                        userDetails={user}
+                        project_id={id.id}
+                        key={index}
+                      />
+                    );
+                  })}
+                </TabsContent>
+                <TabsContent value="mentorProject">
+                  {project_ids.map((id, index) => {
+                    return (
+                      <ProjectDetails
+                        userDetails={user}
+                        project_id={id.id}
+                        key={index}
+                      />
+                    );
+                  })}
+                </TabsContent>
+              </Tabs>
+            ) : (
+              project_ids.map((id, index) => {
                 return (
                   <ProjectDetails
                     userDetails={user}
@@ -60,15 +89,7 @@ export default async function Page() {
                   />
                 );
               })
-              : project_ids.map((id, index) => {
-                return (
-                  <ProjectDetails
-                    userDetails={user}
-                    project_id={id.id}
-                    key={index}
-                  />
-                );
-              })}
+            )}
           </div>
         </main>
       </div>

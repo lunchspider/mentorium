@@ -19,7 +19,7 @@ import { User } from "@/db/schema";
 export default async function Page({ params }: { params: { id: string } }) {
   const projectDetails = (await get_project(params.id)) as Project;
   const student = await get_mentor_of_project(projectDetails?.student_id || "");
-  let userMentor: User;
+  let userMentor: User = {} as User;
   if (projectDetails?.mentor_id !== null) {
     userMentor = (await get_mentor_of_project(
       projectDetails.mentor_id
@@ -89,24 +89,5 @@ export default async function Page({ params }: { params: { id: string } }) {
         </Card>
       </main>
     </div>
-  );
-}
-
-function MountainIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-    </svg>
   );
 }
