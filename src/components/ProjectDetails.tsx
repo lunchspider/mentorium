@@ -40,7 +40,7 @@ export default async function ProjectDetails({ userDetails, project_id }: { user
               </span>
             </dd>
             <Link
-              href={`/project/1/${userDetails.role === "mentor" ? "feedback" : "description"
+              href={`/project/${project.id}/${userDetails.role === "mentor" ? "feedback" : "description"
                 }`}
             >
               <Button className="w-32 mt-3">Check Now</Button>
