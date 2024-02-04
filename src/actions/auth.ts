@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { User, users } from "@/db/schema";
 import { encode, decode } from 'jwt-simple'
 import { cookies } from "next/headers";
 import crypto from "crypto";
@@ -87,9 +87,14 @@ export async function login(data: { email: string, password: string }) {
 }
 
 
-export async function getUser(tokenString: string) {
+export async function getUser() {
     try {
-        const result = decode(tokenString, process.env.SALT_KEY!, false, "HS512");
+        const cookieStore = cookies();
+        const tokenString = cookieStore.get('token')?.value;
+        if (!tokenString) {
+            return undefined;
+        }
+        const result: User = decode(tokenString, process.env.SALT_KEY!, false, "HS512");
         return result;
     } catch (e: any) {
         console.log(e);
