@@ -59,7 +59,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Link>
         </nav>
       </header> */}
-      <main className="flex flex-col sm:flow-row p-4 md:p-6 gap-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 p-10 w-full">
         <ViewProject
           projectDetails={projectDetails}
           student={student}
@@ -87,7 +87,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </form>
           </CardContent>
         </Card>
-      </main>
+      </div>
     </div>
   );
 }
