@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { isAuthenticated } from "@/lib/auth";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
             {!isAuth ? <Navbar /> : <Header />}
             {children}
             <Footer />
+            <Toaster />
           </div>
         </ThemeProvider>
       </body>

@@ -24,6 +24,8 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { login } from "@/actions/auth";
+import { useToast } from "@/components/ui/use-toast";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -36,7 +38,9 @@ const formSchema = z.object({
 
 export default function SignIn() {
   const router = useRouter();
+  const { toast } = useToast();
   const [error, setError] = useState(null);
+  const [load, setLoad] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,13 +52,20 @@ export default function SignIn() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setLoad(true);
       console.log(values);
       const res = await login(values);
       console.log(res);
       router.push("/dashboard");
     } catch (e: any) {
       console.log(e);
+      setLoad(false);
       setError(e.message);
+      toast({
+        variant: "destructive",
+        title: "Log in Failed",
+        description: e.message,
+      });
     }
   }
 
@@ -88,7 +99,6 @@ export default function SignIn() {
                     </FormItem>
                   )}
                 />
-
                 <FormField
                   control={form.control}
                   name="password"
@@ -103,7 +113,14 @@ export default function SignIn() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Login</Button>
+                {load ? (
+                  <Button disabled>
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </Button>
+                ) : (
+                  <Button type="submit">Log In</Button>
+                )}
               </form>
             </Form>
           </CardContent>
