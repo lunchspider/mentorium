@@ -12,10 +12,19 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { get_project } from "@/actions/project";
 import { get_mentor_of_project } from "@/actions/project";
+import ViewProject from "@/components/ViewProject";
+import { Project } from "@/db/schema";
+import { User } from "@/db/schema";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const projectDetails = await get_project(params.id);
+  const projectDetails = (await get_project(params.id)) as Project;
   const student = await get_mentor_of_project(projectDetails?.student_id || "");
+  let userMentor: User;
+  if (projectDetails?.mentor_id !== null) {
+    userMentor = (await get_mentor_of_project(
+      projectDetails.mentor_id
+    )) as User;
+  }
   return (
     <div className="flex flex-col">
       {/* <header className="flex h-16 items-center border-b px-4 md:px-6">
@@ -51,34 +60,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         </nav>
       </header> */}
       <main className="flex flex-col sm:flow-row p-4 md:p-6 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>{projectDetails?.name}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col gap-4">
-              <div>
-                <h3 className="text-lg font-semibold">Description</h3>
-                <p>{projectDetails?.description}</p>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-md font-semibold">Student Name</h3>
-                  <div>
-                    <p>{student.name}</p>
-                    <p className="text-slate-500">{student.email}</p>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-semibold">Tech Stack</h3>
-                  <p>React, Next, Schadcn</p>
-                </div>
-              </div>
-              <h3 className="text-lg font-semibold">Want to contribute</h3>
-              <Button type="submit">Join Prohect</Button>
-            </div>
-          </CardContent>
-        </Card>
+        <ViewProject
+          projectDetails={projectDetails}
+          student={student}
+          userMentor={userMentor}
+        />
         <Card>
           <CardHeader>
             <CardTitle>Feedback</CardTitle>

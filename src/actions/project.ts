@@ -87,3 +87,13 @@ export async function get_mentor_of_project(id: string) {
         throw e;
     }
 }
+
+export async function join_project(projectId: string, teacherId: string) { 
+    try {
+        return db.update(projects).set({ mentor_id: teacherId}).where(eq(projects.id, projectId)).returning()
+            .then((res) => res[0]);
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}
