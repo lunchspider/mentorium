@@ -1,8 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ShowcaseProject from "@/components/Showcase";
-import Showcase2Project from "@/components/Showcase2";
-import Showcase3Project from "@/components/Showcase3";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 

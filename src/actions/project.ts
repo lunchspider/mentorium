@@ -21,3 +21,13 @@ export async function create_project(data: { name: string, description: string, 
         throw e;
     }
 }
+
+
+export async function get_projects() {
+    try {
+        return db.select().from(projects);
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}

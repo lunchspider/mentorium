@@ -13,9 +13,7 @@ import {
   DropdownMenuContent,
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
-import Image from "next/image";
 import { Profile } from "@/components/Profile";
-import { getToken } from "@/lib/getCookie";
 import { getUser } from "@/actions/auth";
 import { User } from "@/db/schema";
 
@@ -26,13 +24,7 @@ export default async function Page({
     id: string;
   };
 }) {
-  const token: string = getToken() || "";
-  const user: User = (await getUser(token)) || {
-    id: 0,
-    name: "",
-    email: "",
-    role: "",
-  };
+  const user: User = (await getUser()) || ({} as User);
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">

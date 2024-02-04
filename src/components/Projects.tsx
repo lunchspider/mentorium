@@ -34,7 +34,7 @@ export function Projects() {
               <Input id="name" placeholder="Name of your project" />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="description"> Project-Description</Label>
+              <Label htmlFor="description">Project-Description</Label>
               <Input
                 id="description"
                 placeholder="Description of your project"
