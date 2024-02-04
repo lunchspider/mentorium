@@ -52,11 +52,12 @@ export async function get_project(id: string): Promise<Project | undefined> {
     }
 }
 
-export async function get_all_project(): Promise<Project[] | undefined> {
+export async function get_all_project(): Promise<Project[]> {
     try {
         return db
             .select()
-            .from(projects);
+            .from(projects)
+            .limit(20);
     } catch (e: any) {
         console.log(e);
         throw e;

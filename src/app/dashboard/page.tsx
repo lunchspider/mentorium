@@ -7,7 +7,6 @@ import { Profile } from "@/components/Profile";
 import { AddProject } from "@/components/AddProject";
 import { redirect } from "next/navigation";
 import { get_projects_with_user_id, get_all_project } from "@/actions/project";
-import { Project } from "@/db/schema";
 
 export default async function Page() {
   const user = await getUser();
@@ -16,7 +15,7 @@ export default async function Page() {
     redirect("/sign-in");
   }
   const project_ids = await get_projects_with_user_id(user.id);
-  const all_project_ids = (await get_all_project()) || [];
+  const all_project_ids = await get_all_project();
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
@@ -53,23 +52,23 @@ export default async function Page() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
             {user.role === "mentor"
               ? all_project_ids.map((id, index) => {
-                  return (
-                    <ProjectDetails
-                      userDetails={user}
-                      project_id={id.id}
-                      key={index}
-                    />
-                  );
-                })
+                return (
+                  <ProjectDetails
+                    userDetails={user}
+                    project_id={id.id}
+                    key={index}
+                  />
+                );
+              })
               : project_ids.map((id, index) => {
-                  return (
-                    <ProjectDetails
-                      userDetails={user}
-                      project_id={id.id}
-                      key={index}
-                    />
-                  );
-                })}
+                return (
+                  <ProjectDetails
+                    userDetails={user}
+                    project_id={id.id}
+                    key={index}
+                  />
+                );
+              })}
           </div>
         </main>
       </div>
