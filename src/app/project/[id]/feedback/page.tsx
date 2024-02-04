@@ -51,81 +51,34 @@ export default async function Page({ params }: { params: { id: string } }) {
         </nav>
       </header> */}
       <main className="flex flex-col sm:flow-row p-4 md:p-6 gap-4">
-        <div className="flex justify-center flex-col items-center gap-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>{projectDetails?.name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold">Description</h3>
-                  <p>{projectDetails?.description}</p>
+        <Card>
+          <CardHeader>
+            <CardTitle>{projectDetails?.name}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col gap-4">
+              <div>
+                <h3 className="text-lg font-semibold">Description</h3>
+                <p>{projectDetails?.description}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1">
+                  <h3 className="text-md font-semibold">Student Name</h3>
+                  <div>
+                    <p>{student.name}</p>
+                    <p className="text-slate-500">{student.email}</p>
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1">
-                    <h3 className="text-md font-semibold">Student Name</h3>
-                    <div>
-                      <p>{student.name}</p>
-                      <p className="text-slate-500">{student.email}</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-lg font-semibold">Tech Stack</h3>
-                    <p>React, Next, Schadcn</p>
-                  </div>
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-lg font-semibold">Tech Stack</h3>
+                  <p>React, Next, Schadcn</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Place Order</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form className="grid gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="meal">Meal</Label>
-                  <Select>
-                    <SelectTrigger id="meal">
-                      <div>Select a meal</div>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="breakfast">Breakfast</SelectItem>
-                      <SelectItem value="lunch">Lunch</SelectItem>
-                      <SelectItem value="dinner">Dinner</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="item">Item</Label>
-                  <Select>
-                    <SelectTrigger id="item">
-                      <div>Select an item</div>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="oatmeal">Oatmeal</SelectItem>
-                      <SelectItem value="toast">Toast</SelectItem>
-                      <SelectItem value="eggs">Eggs</SelectItem>
-                      <SelectItem value="cereal">Cereal</SelectItem>
-                      <SelectItem value="sandwich">Sandwich</SelectItem>
-                      <SelectItem value="salad">Salad</SelectItem>
-                      <SelectItem value="soup">Soup</SelectItem>
-                      <SelectItem value="rice">Rice</SelectItem>
-                      <SelectItem value="stew">Stew</SelectItem>
-                      <SelectItem value="pasta">Pasta</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="quantity">Quantity</Label>
-                  <Input id="quantity" min="1" type="number" />
-                </div>
-                <Button type="submit">Place Order</Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
+              <h3 className="text-lg font-semibold">Want to contribute</h3>
+              <Button type="submit">Join Prohect</Button>
+            </div>
+          </CardContent>
+        </Card>
         <Card>
           <CardHeader>
             <CardTitle>Feedback</CardTitle>
