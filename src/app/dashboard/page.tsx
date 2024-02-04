@@ -12,7 +12,7 @@ export default async function Page() {
   const user = await getUser();
 
   if (!user) {
-    redirect('/login');
+    redirect('/sign-in');
   }
 
   return (

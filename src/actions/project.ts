@@ -8,12 +8,12 @@ export async function create_project(data: { name: string, description: string, 
         if (!user) {
             throw 'not logged in!';
         }
-        if (user.role !== "mentor") {
-            throw 'not a mentor';
+        if (user.role !== "student") {
+            throw 'not a student';
         }
 
         return db.insert(projects)
-            .values({ ...data, mentor_id: user?.id })
+            .values({ ...data, student_id: user.id })
             .returning({ id: projects.id })
             .then((res) => res[0]);
     } catch (e: any) {
