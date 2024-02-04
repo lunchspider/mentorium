@@ -1,11 +1,11 @@
 'use server';
 
-import { projects, Project, users } from "@/db/schema";
+import { projects, Project, users, tech_stacks, project_to_tech_stack } from "@/db/schema";
 import { getUser } from "./auth";
 import { db } from '@/db';
 import { eq, or, sql } from "drizzle-orm";
 
-export async function create_project(data: { name: string, description: string, category: string }) {
+export async function create_project(data: { name: string, description: string, category: string, tech_stacks: string[] }) {
     try {
         const user = await getUser();
         if (!user) {
@@ -15,10 +15,17 @@ export async function create_project(data: { name: string, description: string, 
             throw 'not a student';
         }
 
-        return db.insert(projects)
+        const id = await db.insert(projects)
             .values({ ...data, student_id: user.id })
             .returning({ id: projects.id })
             .then((res) => res[0]);
+
+        Promise.all(data.tech_stacks.map(async (tech_stack_id) => {
+            await db.insert(project_to_tech_stack)
+                .values({ tech_stack_id, project_id: id.id })
+        }));
+
+        return id;
     } catch (e: any) {
         console.log(e);
         throw e;
@@ -113,4 +120,10 @@ export async function search_project(search_string: string) {
         console.log(e);
         throw e;
     }
+}
+
+export async function get_tech_stacks() {
+    return db
+        .select({ id: tech_stacks.id, name: tech_stacks.name })
+        .from(tech_stacks)
 }

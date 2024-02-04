@@ -32,9 +32,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { create_project } from "@/actions/project";
+import { useState, use } from "react";
+import { create_project, get_tech_stacks } from "@/actions/project";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "./ui/checkbox";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -44,9 +45,11 @@ const formSchema = z.object({
     message: "Description must have 1 characters.",
   }),
   category: z.enum(["ideation", "progress", "completed"]),
+
+  tech_stacks: z.array(z.string()),
 });
 
-export function AddProject() {
+export function AddProject({ tech_stacks }: { tech_stacks: { id: string, name: string }[] }) {
   const [open, setOpen] = useState<boolean>(false);
   const router = useRouter();
   const [error, setError] = useState(null);
@@ -57,13 +60,13 @@ export function AddProject() {
       name: "",
       description: "",
       category: "ideation",
+      tech_stacks: [],
     },
   });
 
   const on_submit = async (values: z.infer<typeof formSchema>) => {
     try {
       const { id } = await create_project(values);
-      console.log(id);
       router.push(`/project/${id}/description`);
     } catch (e: any) {
       console.log(e);
@@ -125,6 +128,55 @@ export function AddProject() {
 
               <FormField
                 control={form.control}
+                name="tech_stacks"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <FormLabel className="text-base">Tech Stacks</FormLabel>
+                      <FormDescription>
+                        Select the tech stacks you will be using in this project.
+                      </FormDescription>
+                    </div>
+                    {tech_stacks.map((item) => (
+                      <FormField
+                        key={item.id}
+                        control={form.control}
+                        name="tech_stacks"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={item.id}
+                              className="flex flex-row items-start space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(item.id)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([...field.value, item.id])
+                                      : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== item.id
+                                        )
+                                      )
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="font-normal">
+                                {item.name}
+                              </FormLabel>
+                            </FormItem>
+                          )
+                        }}
+                      />
+                    ))}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name="category"
                 render={({ field }) => (
                   <FormItem>
@@ -149,6 +201,7 @@ export function AddProject() {
                   </FormItem>
                 )}
               />
+
 
               <Button type="submit">Deploy</Button>
             </form>

@@ -18,7 +18,7 @@ import { getUser } from "@/actions/auth";
 import { Project, User } from "@/db/schema";
 import { get_project, get_mentor_of_project } from "@/actions/project";
 import { UpdateProjectDetails } from "@/components/UpdateProjectDetails";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function Page({
   params,
