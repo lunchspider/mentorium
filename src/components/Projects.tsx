@@ -24,7 +24,7 @@ export function Projects() {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Enlist project</CardTitle>
-        <CardDescription>Add up your project in one-click.</CardDescription>
+        <CardDescription>Add up your project to get mentored.</CardDescription>
       </CardHeader>
       <CardContent>
         <form>
@@ -34,20 +34,21 @@ export function Projects() {
               <Input id="name" placeholder="Name of your project" />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description"> Project-Description</Label>
               <Input
                 id="description"
                 placeholder="Description of your project"
               />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="category">Category</Label>
+              <Label htmlFor="category">Progress Category</Label>
               <Select>
                 <SelectTrigger id="category">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="ideation">Ideation</SelectItem>
+
                   <SelectItem value="in-progress">In Progress</SelectItem>
                   <SelectItem value="completed">Completed</SelectItem>
                 </SelectContent>
