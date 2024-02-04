@@ -137,39 +137,41 @@ export function AddProject({ tech_stacks }: { tech_stacks: { id: string, name: s
                         Select the tech stacks you will be using in this project.
                       </FormDescription>
                     </div>
-                    {tech_stacks.map((item) => (
-                      <FormField
-                        key={item.id}
-                        control={form.control}
-                        name="tech_stacks"
-                        render={({ field }) => {
-                          return (
-                            <FormItem
-                              key={item.id}
-                              className="flex flex-row items-start space-x-3 space-y-0"
-                            >
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(item.id)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([...field.value, item.id])
-                                      : field.onChange(
-                                        field.value?.filter(
-                                          (value) => value !== item.id
+                    <div className = "flex flex-wrap gap-2">
+                      {tech_stacks.map((item) => (
+                        <FormField
+                          key={item.id}
+                          control={form.control}
+                          name="tech_stacks"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={item.id}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item.id)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...field.value, item.id])
+                                        : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== item.id
+                                          )
                                         )
-                                      )
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                {item.name}
-                              </FormLabel>
-                            </FormItem>
-                          )
-                        }}
-                      />
-                    ))}
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {item.name}
+                                </FormLabel>
+                              </FormItem>
+                            )
+                          }}
+                        />
+                      ))}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
