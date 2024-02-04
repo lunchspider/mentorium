@@ -16,7 +16,7 @@ import {
 import { Profile } from "@/components/Profile";
 import { getUser } from "@/actions/auth";
 import { Project, User } from "@/db/schema";
-import { get_project, get_mentor } from "@/actions/project";
+import { get_project, get_mentor_of_project } from "@/actions/project";
 import { UpdateProjectDetails } from "@/components/UpdateProjectDetails";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
@@ -36,7 +36,8 @@ export default async function Page({
   console.log(projectDetails);
   let userMentor: User = {} as User;
   if (projectDetails.mentor_id) {
-    userMentor = (await get_mentor(projectDetails.mentor_id)) || ({} as User);
+    userMentor =
+      (await get_mentor_of_project(projectDetails.mentor_id)) || ({} as User);
     console.log(userMentor);
   }
   return (
