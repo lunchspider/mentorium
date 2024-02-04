@@ -10,11 +10,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { get_project } from "@/actions/project";
+import { get_mentor_of_project } from "@/actions/project";
 
-export default function Page() {
+export default async function Page({ params }: { params: { id: string } }) {
+  const projectDetails = await get_project(params.id);
+  const student = await get_mentor_of_project(projectDetails?.student_id || "");
   return (
     <div className="flex flex-col">
-      <header className="flex h-16 items-center border-b px-4 md:px-6">
+      {/* <header className="flex h-16 items-center border-b px-4 md:px-6">
         <Link className="flex items-center gap-2" href="#">
           <MountainIcon className="h-6 w-6" />
           <span className="text-lg font-semibold">Mess Operations</span>
@@ -45,26 +49,31 @@ export default function Page() {
             Feedback
           </Link>
         </nav>
-      </header>
-      <main className="flex-1 p-4 md:p-6">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      </header> */}
+      <main className="flex flex-col sm:flow-row p-4 md:p-6 gap-4">
+        <div className="flex justify-center flex-col items-center gap-4">
           <Card>
             <CardHeader>
-              <CardTitle>Current Menu</CardTitle>
+              <CardTitle>{projectDetails?.name}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-semibold">Breakfast</h3>
-                  <p>Oatmeal, Toast, Eggs, Cereal</p>
+              <div className="flex flex-col gap-4">
+                <div>
+                  <h3 className="text-lg font-semibold">Description</h3>
+                  <p>{projectDetails?.description}</p>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-semibold">Lunch</h3>
-                  <p>Sandwich, Salad, Soup, Rice</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-semibold">Dinner</h3>
-                  <p>Stew, Pasta, Rice, Salad</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-md font-semibold">Student Name</h3>
+                    <div>
+                      <p>{student.name}</p>
+                      <p className="text-slate-500">{student.email}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-lg font-semibold">Tech Stack</h3>
+                    <p>React, Next, Schadcn</p>
+                  </div>
                 </div>
               </div>
             </CardContent>

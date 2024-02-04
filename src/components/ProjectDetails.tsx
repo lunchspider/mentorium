@@ -50,7 +50,7 @@ export default async function ProjectDetails({
                 userDetails.role === "mentor" ? "feedback" : "description"
               }`}
             >
-              <Button className="w-32 mt-3">Check Now</Button>
+              <Button className="w-32 mt-3">View Project</Button>
             </Link>
           </div>
         </dl>

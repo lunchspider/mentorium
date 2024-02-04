@@ -75,6 +75,7 @@ export function UpdateProjectDetails({
       const res = await update_project(values);
       console.log(res);
       setOpen(false);
+      setLoad(false);
       router.push(`/project/${projectDetails.id}/description`);
     } catch (e: any) {
       setLoad(false);
