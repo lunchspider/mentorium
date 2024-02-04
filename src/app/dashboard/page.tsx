@@ -49,14 +49,21 @@ export default async function Page() {
             </form>
             {user.role !== "mentor" ? <AddProject /> : null}
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-            {user.role === "mentor" ? (
-              <Tabs defaultValue="allproject">
-                <TabsList>
-                  <TabsTrigger value="allproject">All projects</TabsTrigger>
-                  <TabsTrigger value="mentorProject">my projects</TabsTrigger>
-                </TabsList>
-                <TabsContent value="allproject">
+          {user.role === "mentor" ? (
+            <Tabs
+              defaultValue="allproject"
+              className=" flex justify-center flex-col w-full max-w-6xl mx-auto gap-5"
+            >
+              <TabsList>
+                <TabsTrigger value="allproject" className={"w-1/2"}>
+                  All projects
+                </TabsTrigger>
+                <TabsTrigger value="mentorProject" className={"w-1/2"}>
+                  my projects
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="allproject">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
                   {all_project_ids.map((id, index) => {
                     return (
                       <ProjectDetails
@@ -66,21 +73,29 @@ export default async function Page() {
                       />
                     );
                   })}
-                </TabsContent>
-                <TabsContent value="mentorProject">
-                  {project_ids.map((id, index) => {
-                    return (
-                      <ProjectDetails
-                        userDetails={user}
-                        project_id={id.id}
-                        key={index}
-                      />
-                    );
-                  })}
-                </TabsContent>
-              </Tabs>
-            ) : (
-              project_ids.map((id, index) => {
+                </div>
+              </TabsContent>
+              <TabsContent value="mentorProject">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
+                  {project_ids.length != 0 ? (
+                    project_ids.map((id, index) => {
+                      return (
+                        <ProjectDetails
+                          userDetails={user}
+                          project_id={id.id}
+                          key={index}
+                        />
+                      );
+                    })
+                  ) : (
+                    <p className="text-center">No projects found</p>
+                  )}
+                </div>
+              </TabsContent>
+            </Tabs>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
+              {project_ids.map((id, index) => {
                 return (
                   <ProjectDetails
                     userDetails={user}
@@ -88,9 +103,9 @@ export default async function Page() {
                     key={index}
                   />
                 );
-              })
-            )}
-          </div>
+              })}
+            </div>
+          )}
         </main>
       </div>
     </>

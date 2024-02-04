@@ -10,7 +10,7 @@ At Mentorium, we've crafted a vibrant ecosystem that brings together the worlds 
 - React
 - Tailwind CSS
 - PostgreSQL (psql)
-- SCADCN
+- SHADCN
 
 ## Getting Started
 
@@ -58,7 +58,3 @@ Explore the Mentorium platform live at [https://mentoriumm.vercel.app/](https://
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-If you have any questions or feedback, feel free to reach out to us at [info@mentorium.com](mailto:info@mentorium.com). We appreciate your interest and support!
