@@ -51,3 +51,14 @@ export async function get_project(id: string): Promise<Project | undefined> {
         throw e;
     }
 }
+
+export async function get_all_project(): Promise<Project[] | undefined> {
+    try {
+        return db
+            .select()
+            .from(projects);
+    } catch (e: any) {
+        console.log(e);
+        throw e;
+    }
+}

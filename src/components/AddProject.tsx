@@ -64,7 +64,7 @@ export function AddProject() {
     try {
       const { id } = await create_project(values);
       console.log(id);
-      router.push(`/project/${id}`);
+      router.push(`/project/${id}/description`);
     } catch (e: any) {
       console.log(e);
       setError(e.message);
@@ -139,9 +139,7 @@ export function AddProject() {
                         </SelectTrigger>
                         <SelectContent position="popper">
                           <SelectItem value="ideation">Ideation</SelectItem>
-                          <SelectItem value="in-progress">
-                            In Progress
-                          </SelectItem>
+                          <SelectItem value="progress">In Progress</SelectItem>
                           <SelectItem value="completed">Completed</SelectItem>
                         </SelectContent>
                       </Select>
