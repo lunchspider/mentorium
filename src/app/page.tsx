@@ -19,8 +19,8 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center py-8">
-          <div className="grid grid-cols-1 gap-8 px-44 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-col items-center justify-center">
+          <div className="grid grid-cols-1 sm:px-44 md:grid-cols-2 lg:grid-cols-3">
             <ShowcaseProject
               title="Mentor as a Catalyst"
               description="Mentorship is more than just guidance—its a catalyst for personal and professional growth. Mentorium aims to empower mentees to reach their full potential."

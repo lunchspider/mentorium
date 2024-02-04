@@ -34,6 +34,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { create_project } from "@/actions/project";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -111,7 +112,10 @@ export function AddProject() {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input placeholder="description" {...field} />
+                      <Textarea
+                        {...field}
+                        placeholder="Description of your project"
+                      />
                     </FormControl>
                     <FormDescription>Enter your description</FormDescription>
                     <FormMessage />
