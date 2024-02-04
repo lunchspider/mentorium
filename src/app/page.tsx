@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <section className="w-full py-16 md:py-24 lg:py-32 xl:py-48 flex flex-col gap-20 bg-gradient-to-b from-gray-800 to-gray-900 text-white">
+      <section className="w-full py-16 md:py-24 lg:py-32 xl:py-48 flex flex-col gap-20 bg-gradient-to-b ">
         <div className="container px-4 mx-auto">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
