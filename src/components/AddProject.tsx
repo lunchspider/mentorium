@@ -84,7 +84,7 @@ export function AddProject() {
           <DialogHeader>
             <DialogTitle>Add A Project</DialogTitle>
             <DialogDescription>
-              A project can be anything from a new product to a new feature.
+              Add up your project to get mentored.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -105,7 +105,7 @@ export function AddProject() {
                   <Label htmlFor="category">Category</Label>
                   <Select>
                     <SelectTrigger id="category">
-                      <SelectValue placeholder="Select" />
+                      <SelectValue placeholder="Progress Category" />
                     </SelectTrigger>
                     <SelectContent position="popper">
                       <SelectItem value="ideation">Ideation</SelectItem>

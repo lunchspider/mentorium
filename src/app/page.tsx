@@ -16,15 +16,25 @@ export default function Home() {
               Welcome to MENTORIUM
             </h1>
             <p className="mx-auto max-w-[700px] mt-4 text-lg">
-              A vibrant ecosystem that brings together the worlds of innovation and mentorship.
+              A vibrant ecosystem that brings together the worlds of innovation
+              and mentorship.
             </p>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center py-8">
-          <div className="grid grid-cols-1 gap-8 p-6 md:grid-cols-2 lg:grid-cols-3">
-            <ShowcaseProject />
-            <Showcase2Project />
-            <Showcase3Project />
+          <div className="grid grid-cols-1 gap-8 px-44 md:grid-cols-2 lg:grid-cols-3">
+            <ShowcaseProject
+              title="Mentor as a Catalyst"
+              description="Mentorship is more than just guidance—its a catalyst for personal and professional growth. Mentorium aims to empower mentees to reach their full potential."
+            />
+            <ShowcaseProject
+              title="Enabling Collaboration"
+              description="Mentorium is not just a platform; it's a collaborative space where ideas are born, refined, and brought to life."
+            />
+            <ShowcaseProject
+              title="Innovation at the Forefront"
+              description="Whether youre a mentee with a groundbreaking project or a mentor with a unique perspective, our platform is the canvas where innovation thrives."
+            />
           </div>
         </div>
       </section>
