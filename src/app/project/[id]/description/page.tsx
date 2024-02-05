@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Profile } from "@/components/Profile";
 import { getUser } from "@/actions/auth";
-import { Project, User } from "@/db/schema";
+import { User } from "@/db/schema";
 import { get_project, get_mentor_of_project } from "@/actions/project";
 import { UpdateProjectDetails } from "@/components/UpdateProjectDetails";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -32,8 +32,7 @@ export default async function Page({
   if (!user) {
     redirect('/sign-in');
   }
-  const projectDetails =
-    await get_project(params.id);
+  const projectDetails = await get_project(params.id);
   if (!projectDetails) {
     console.log("project not found");
     redirect('/');
@@ -41,8 +40,7 @@ export default async function Page({
   console.log(projectDetails);
   let userMentor: User = {} as User;
   if (projectDetails.mentor_id) {
-    userMentor =
-      (await get_mentor_of_project(projectDetails.mentor_id)) || ({} as User);
+    userMentor = (await get_mentor_of_project(projectDetails.mentor_id)) || ({} as User);
     console.log(userMentor);
   }
   return (
