@@ -24,7 +24,7 @@ export const projects = pgTable('projects', {
     chat_room_id: uuid('chat_room_id').references(() => chat_rooms.id)
 });
 
-export type Project = typeof projects.$inferSelect;
+export type Project = Omit<typeof projects.$inferSelect, "ts">;
 
 export const tech_stacks = pgTable('tech_stacks', {
     id: uuid('id').primaryKey().defaultRandom(),

@@ -19,6 +19,7 @@ import { Project, User } from "@/db/schema";
 import { get_project, get_mentor_of_project } from "@/actions/project";
 import { UpdateProjectDetails } from "@/components/UpdateProjectDetails";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { redirect } from "next/navigation";
 
 export default async function Page({
   params,
@@ -27,11 +28,15 @@ export default async function Page({
     id: string;
   };
 }) {
-  const user: User = (await getUser()) || ({} as User);
-  const projectDetails: Project =
-    (await get_project(params.id)) || ({} as Project);
+  const user = await getUser();
+  if (!user) {
+    redirect('/sign-in');
+  }
+  const projectDetails =
+    await get_project(params.id);
   if (!projectDetails) {
     console.log("project not found");
+    redirect('/');
   }
   console.log(projectDetails);
   let userMentor: User = {} as User;

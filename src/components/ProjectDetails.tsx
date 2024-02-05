@@ -32,9 +32,9 @@ export default async function ProjectDetails({
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
               Tech Stack
             </dt>
-            <dd className="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2">
-              React, Node.js, Express, MongoDB
-            </dd>
+            <dl className="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2 flex flex-wrap">
+              {project.tech_stack.map((x, index) => <dd className="capitalize p-2" key={index}>{x}</dd>)}
+            </dl>
           </div>
           <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -46,9 +46,8 @@ export default async function ProjectDetails({
               </span>
             </dd>
             <Link
-              href={`/project/${project.id}/${
-                userDetails.role === "mentor" ? "feedback" : "description"
-              }`}
+              href={`/project/${project.id}/${userDetails.role === "mentor" ? "feedback" : "description"
+                }`}
             >
               <Button className="w-32 mt-3">View Project</Button>
             </Link>

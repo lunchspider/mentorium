@@ -45,10 +45,19 @@ export async function get_projects_with_user_id(id: string) {
     }
 }
 
-export async function get_project(id: string): Promise<Project | undefined> {
+export async function get_project(id: string): Promise<Project & { tech_stack: string[] } | undefined> {
     try {
         return db
-            .select()
+            .select({
+                id: projects.id,
+                name: projects.name,
+                description: projects.description,
+                category: projects.category,
+                mentor_id: projects.mentor_id,
+                student_id: projects.student_id,
+                chat_room_id: projects.chat_room_id,
+                tech_stack: sql<string[]>`array(select name from project_to_tech_stack, tech_stacks where project_to_tech_stack.project_id = ${id}) `
+            })
             .from(projects)
             .where(eq(projects.id, id))
             .limit(1)
